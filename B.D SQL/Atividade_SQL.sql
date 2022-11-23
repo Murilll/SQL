@@ -38,7 +38,7 @@ INSERT Venda (id_Cliente, id_Produto, data_Venda) VALUES (1, 1, '2.3.2000'),
 														 (3, 2, '5.2.2003'),
 														 (2, 5, '6.7.2005')
 
-SELECT Cliente.nome as 'Nome Cliente', Produto.nome as 'Nome Produto', Venda.data_Venda				-- Join, usado para ligar tabelas
+SELECT Cliente.nome as 'Nome Cliente', Cliente.cpf as 'CPF', Produto.nome as 'Nome Produto', Produto.preço as 'Preço', Venda.data_Venda		-- Join, usado para ligar tabelas
 FROM Venda INNER JOIN Produto ON Produto.id = Venda.id_Produto INNER JOIN Cliente ON Cliente.id = Venda.id_Cliente
 where Venda.data_Venda = '5.2.2003'  -- Consultar por uma data
 
