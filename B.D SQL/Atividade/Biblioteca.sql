@@ -1,0 +1,45 @@
+CREATE DATABASE Biblioteca
+
+USE Biblioteca
+
+CREATE TABLE Cliente(
+	CPF VARCHAR(15) PRIMARY KEY, -- Não precisa colocar Not Null, porque por padrão primary key já vem not null
+	Phone VARCHAR(15) NOT NULL,
+	Nome VARCHAR(20) NOT NULL,
+	Email VARCHAR(30) NOT NULL,
+	Endereço VARCHAR(30) NOT NULL,
+	DataNasc DATE NOT NULL
+)
+
+CREATE TABLE Livro(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	Nome VARCHAR(30) NOT NULL,
+	Autor VARCHAR(30) NOT NULL,
+	Edição INT NOT NULL
+)
+
+CREATE TABLE Exemplar(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	Cod_Livro INT,
+	Disponível BIT
+)
+
+CREATE TABLE Bibliotecaria(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	Nome VARCHAR(30) NOT NULL,
+	Email VARCHAR(30) NOT NULL
+)
+
+CREATE TABLE Emprestimo(
+	ID INT IDENTITY(1,1) PRIMARY KEY,
+	ID_User VARCHAR,
+	ID_Livro VARCHAR,
+	QuemFez VARCHAR,
+	DataEntrega DATE,
+	DataRetirada DATE,
+	
+	FOREIGN KEY (ID_User) REFERENCES Cliente(CPF),
+	FOREIGN KEY (ID_Livro) REFERENCES Livro(ID),
+	FOREIGN KEY (QuemFez) REFERENCES Bibliotecaria(ID)
+)
+
