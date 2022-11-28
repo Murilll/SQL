@@ -59,4 +59,60 @@ SELECT nome FROM tabela2
 SELECT * FROM tabela2 WHERE id = 5 or telefone = '33493532'  -- BUSCAR INFORMAÇÕES ESPECIFICAS NA TABELA
 UPDATE tabela2 set nome = 'Murilin' where id = 12 
 
+create database bosch
+
+use bosch
+
+create table funcionario(
+	id int,
+	nome varchar(30),
+	dia_pgto int default 05)  -- int default, serve para quando não é colocado o valor, o valor é colocado automaticamente (05 é o valor default)
+
+select * from funcionario
+
+insert funcionario (id, nome) values(3, 'guilherme')
+insert funcionario values(4 , 'guilherme', 10)
+
+create table funcionario2(
+	id int,
+	nome varchar(30),
+	dia_pgto int default 5,  -- tem como usar o default e o check junto
+	check(dia_pgto < 31))    -- o check serve para não colocar valores que você não queira (dia_pgto < 31), estourando em um erro.
+
+
+insert funcionario2 values(4, 'murilo', 31)
+insert funcionario2 values(3, 'murilo', 35)
+insert funcionario2 values(1, 'murilo', 2)
+insert funcionario2 values(6, 'murilo', 50)
+
+create table pessoa(
+	id INT IDENTITY (1,1) PRIMARY KEY,
+	nome varchar(30),
+	estado_civil char, -- Char é para letras
+	check(estado_civil in ('s', 'c', 'd', 'v')) -- da para fazer o check com in, ou com or, mas com in é mais facil check(estado_civil = 's') or estado_civil = 'c'
+	)
+
+insert pessoa values('guilherme', 't')
+insert pessoa values('murilo', 's')
+
+select * from pessoa
+
+create table teste_check(
+	id INT IDENTITY (1,1) PRIMARY KEY,
+	estado_civil char,
+	dia_pgto int)
+
+alter table teste_check
+add constraint Default_dia_pgto Default 5 for dia_pgto
+
+alter table teste_check
+add constraint check_estado_civil check(estado_civil in('s','c','v','d'))
+
+-- também tem como fazer assim
+
+-- alter table teste_check
+-- add constraint Default_dia_pgto Default 5 for dia_pgto, check(estado_civil in('s','c','v','d'))
+
+
+
 
