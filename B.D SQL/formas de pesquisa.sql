@@ -42,5 +42,7 @@ select [NOME DO PRODUTO], [PREÇO DE LISTA],
 		end as 'avaliação'
 from [TABELA DE PRODUTOS] 
 
+--
+select [TABELA DE VENDEDORES].MATRICULA, [TABELA DE VENDEDORES].NOME, count (*) from [TABELA DE VENDEDORES] a inner join [NOTAS FISCAIS] b on a.MATRICULA = b.MATRICULA
 
 
