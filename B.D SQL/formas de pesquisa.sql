@@ -21,3 +21,26 @@ select top 10 * from [TABELA DE PRODUTOS] where [PREÇO DE LISTA] < 7  -- top é u
 -- uso do ORDER BY
 select * from [TABELA DE PRODUTOS] where SABOR = 'laranja' order by [PREÇO DE LISTA] desc -- ORDER serve para ordenar a lista, usando o desc, você consegue ver a lista em ordem decrescente
 
+
+-- uso do GROUP BY
+select ESTADO, sum([LIMITE DE CREDITO]) as 'soma' from [TABELA DE CLIENTES] group by ESTADO having sum([LIMITE DE CREDITO]) < 900000  -- having usado para filtrar
+
+select ESTADO, sum([VOLUME DE COMPRA]) as 'soma' from [TABELA DE CLIENTES] group by ESTADO having sum([VOLUME DE COMPRA]) > 5000
+
+-- uso de GROUP BY com função 
+select year([DATA]) as ano, count(*) as quantidade
+from [NOTAS FISCAIS]
+group by YEAR([DATA])
+
+-- uso do CASE
+select [NOME DO PRODUTO], [PREÇO DE LISTA],
+	case when [PREÇO DE LISTA]>=12 
+		then 'produto caro'
+	when [PREÇO DE LISTA]>=7 
+		then 'produto em conta'
+	else 'produto barato' 
+		end as 'avaliação'
+from [TABELA DE PRODUTOS] 
+
+
+
