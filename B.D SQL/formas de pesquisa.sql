@@ -46,3 +46,37 @@ from [TABELA DE PRODUTOS]
 select [TABELA DE VENDEDORES].MATRICULA, [TABELA DE VENDEDORES].NOME, count (*) from [TABELA DE VENDEDORES] a inner join [NOTAS FISCAIS] b on a.MATRICULA = b.MATRICULA
 
 
+select c.NOME, count(*) from [TABELA DE CLIENTES] c left join [NOTAS FISCAIS] nf on c.CPF = nf.CPF group by c.NOME having COUNT(*) = 1
+
+select * from [TABELA DE CLIENTES] t  -- descobrindo a pessoa que não tem nota fiscal
+left join [NOTAS FISCAIS] nf
+on t.CPF = nf.CPF
+where nf.CPF is null
+
+select c.nome, count (nf.CPF) as 'quantidade'   -- descobrindo a pessoa que não tem nota fiscal
+from [TABELA DE CLIENTES] c left join [NOTAS FISCAIS] nf
+on c.CPF =  nf.CPF
+group by c.NOME
+
+
+select * from [NOTAS FISCAIS]
+
+select * from [TABELA DE CLIENTES]
+
+
+select [TABELA DE CLIENTES].BAIRRO from [TABELA DE CLIENTES]
+union
+select [TABELA DE VENDEDORES].BAIRRO from [TABELA DE VENDEDORES]
+
+
+-- SubSelect
+select nome, bairro from [TABELA DE CLIENTES]
+where bairro in (select bairro from [TABELA DE VENDEDORES])
+
+
+INSERT INTO teste (NOME, Preço)(
+	SELECT P.NOME, P.Preço from Produtos_Caros P
+	WHERE P.Preço > 15.00
+	)
+
+SELECT * FROM [TABELA DE PRODUTOS]
